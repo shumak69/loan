@@ -2,8 +2,11 @@ export default class Difference {
     constructor(oldEdu, newEdu, items) {
         this.oldEdu = document.querySelector(oldEdu);
         this.newEdu = document.querySelector(newEdu);
-        this.oldItems = this.oldEdu.querySelectorAll(items);
-        this.newItems = this.newEdu.querySelectorAll(items);
+        try{
+            this.oldItems = this.oldEdu.querySelectorAll(items);
+            this.newItems = this.newEdu.querySelectorAll(items);
+        } catch(e){}
+        
         this.oldCounter = 0;
         this.newCounter = 0;
     }
@@ -14,7 +17,6 @@ export default class Difference {
                 items[counter].style.display = 'flex';
                 items[items.length - 1].remove();
             } else {
-                console.log(items, counter);
                 items[counter].style.display = 'flex';
                 counter++;
             }
@@ -29,9 +31,11 @@ export default class Difference {
         });
     }
     init() {
-        this.hideItems(this.oldItems);
-        this.hideItems(this.newItems);
-        this.bindBtns(this.oldEdu, this.oldItems, this.oldCounter);
-        this.bindBtns(this.newEdu, this.newItems, this.newCounter);
+        try{
+            this.hideItems(this.oldItems);
+            this.hideItems(this.newItems);
+            this.bindBtns(this.oldEdu, this.oldItems, this.oldCounter);
+            this.bindBtns(this.newEdu, this.newItems, this.newCounter);
+        } catch(e){}
     }
 }
